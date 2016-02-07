@@ -1,0 +1,31 @@
+{
+  "name": "streat",
+  "version": "0.0.0",
+  "description": "Stream to ExifTool and stop reading as soon as tags are found",
+  "main": "lib/streat.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/simple.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kapouer/node-streat.git"
+  },
+  "keywords": [
+    "exiftool",
+    "stream",
+    "tags"
+  ],
+  "author": "Jérémy Lal <kapouer@melix.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kapouer/node-streat/issues"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "jstream": "^0.2.8",
+    "tempfile": "^1.1.1"
+  }
+}
