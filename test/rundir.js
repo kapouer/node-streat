@@ -1,24 +1,26 @@
+// node test/rundir.js "/home/dev/Musique/Ampps/*.*"
+
 var fs = require('fs');
-var Path = require('path');
 var Streat = require('../');
 
 var streat = new Streat();
 streat.start();
 
-var dir = process.argv.pop();
+var pattern = process.argv.pop();
 
 var glob = require('glob');
 
-glob(Path.join(dir, '*.avi'), {}, function (err, files) {
+glob(pattern, {}, function (err, files) {
 	Promise.all(files.map(function(file) {
+		console.log(file);
 		return new Promise(function(resolve, reject) {
-			console.log(file);
 			streat.run(fs.createReadStream(file, {
 				encoding: 'binary'
 			}), function(err, tags) {
 				if (err) console.error(err);
 				console.log("got", Object.keys(tags).length, "tags");
 				if (tags.Error) console.error("exiftool returns Error", tags.Error);
+				resolve();
 			});
 		});
 	})).catch(function(err) {
