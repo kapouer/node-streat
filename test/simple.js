@@ -5,9 +5,8 @@ var Streat = require('../');
 var streat = new Streat();
 streat.start();
 
-setTimeout(test, 500);
-
 var counter = 0;
+test();
 
 function test() {
 	counter++;
