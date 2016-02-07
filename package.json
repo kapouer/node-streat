@@ -24,6 +24,7 @@
     "url": "https://github.com/kapouer/node-streat/issues"
   },
   "dependencies": {
+    "clarinet": "^0.11.0",
     "debug": "^2.2.0",
     "jstream": "^0.2.8",
     "tempfile": "^1.1.1"
