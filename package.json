@@ -26,6 +26,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "jstream": "^0.2.9",
-    "tempfile": "^1.1.1"
+    "tempfile": "^1.1.1",
+    "throttleit": "^1.0.0"
   }
 }

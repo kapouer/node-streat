@@ -19,6 +19,7 @@ function test() {
 		streat.run(res, 100000, function(err, tags) {
 			if (err) console.error(err);
 			console.log("finished", tags);
+			streat.stop();
 		});
 	}).end();
 }

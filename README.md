@@ -4,7 +4,7 @@ Streat
 Stream to ExifTool
 
 Exposes a `Street` class that spawns and keeps ExifTool open,
-using the -stay_open option.
+using the -stay_open option. Respawns it on failure.
 
 It is much faster than spawning exiftool on each request.
 
@@ -29,6 +29,7 @@ var streat = new Street({
 	step: 32768 // the default step for trying decoding by chunks
 });
 
+// start exiftool
 streat.start();
 
 // runtime code
@@ -37,7 +38,7 @@ streat.run(readableStream, maxBytesToRead, function(err, tags) {
 });
 // multiple times... calls are queued
 
-// destroy code
+// close exiftool
 streat.stop()
 ```
 
