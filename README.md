@@ -33,7 +33,7 @@ var streat = new Street({
 streat.start();
 
 // runtime code
-streat.run(readableStream, maxBytesToRead, function(err, tags) {
+streat.run(readableStream, params, function(err, tags) {
 
 });
 // multiple times... calls are queued
@@ -44,6 +44,13 @@ streat.stop()
 
 It is also possible to spawn several instances of exiftool,
 and maintain them using a pool.
+
+The `params` can be either:
+- absent
+- a limit (number): max total bytes to read
+- an object with `limit` and `step` keys
+
+`step` is the number of bytes to read for each pass.
 
 
 License
