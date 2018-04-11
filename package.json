@@ -1,6 +1,6 @@
 {
   "name": "streat",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Stream to ExifTool and stop reading as soon as tags are found",
   "main": "lib/streat.js",
   "directories": {
