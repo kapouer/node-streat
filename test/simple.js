@@ -1,25 +1,23 @@
-var URL = require('url');
-var http = require('http');
-var Streat = require('../');
+const URL = require('url');
+const https = require('https');
+const Streat = require('../');
 
-var streat = new Streat();
+const streat = new Streat();
 streat.start();
 
-var counter = 0;
+let counter = 0;
 test();
 
 function test() {
 	counter++;
 	if (counter > 100) process.exit();
-	console.log("request");
-	var opts = URL.parse("http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4");
-	http.request(opts, function(res) {
-		console.log("status", res.statusCode);
+	console.info("request");
+	const opts = URL.parse("https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_30MB.mp4");
+	https.request(opts, async res => {
+		console.info("status", res.statusCode);
 		res.pause();
-		streat.run(res, 100000, function(err, tags) {
-			if (err) console.error(err);
-			console.log("finished", tags);
-			streat.stop();
-		});
+		const tags = await streat.run(res, 100000);
+		console.info("finished", tags);
+		streat.stop();
 	}).end();
 }
