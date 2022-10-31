@@ -1,8 +1,8 @@
-const ChildProcess = require('node:child_process');
+const ChildProcess = require('child_process');
 const Throttle = require('throttleit');
 const { Deferred } = require('class-deferred');
 const JStream = require('jstream');
-const fs = require('node:fs');
+const fs = require('fs');
 const tempfile = require('tempfile');
 const debug = require('debug')('streat');
 
