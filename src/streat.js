@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+import exitHook from 'exit-hook';
 import Throttle from 'throttleit';
 import { Deferred } from 'class-deferred';
 import JStream from 'jstream';
@@ -18,7 +19,6 @@ export default class Streat {
 		this.filepath = tempfile();
 		this.service = null;
 		this.queue = [];
-		this.stop = this.stop.bind(this);
 	}
 	run(res, params) {
 		const defer = new Deferred();
@@ -42,7 +42,7 @@ export default class Streat {
 		debug('spawn exiftool');
 		this.running = true;
 
-		process.on('exit', this.stop);
+		exitHook(() => this.stop());
 
 		this.service = spawn('exiftool', [
 			'-stay_open', 'True', '-@', '-'
@@ -83,7 +83,6 @@ export default class Streat {
 	stop() {
 		this.running = false;
 		if (!this.service) return;
-		process.removeListener('exit', this.stop);
 		this.service.stdout.unpipe();
 		this.service.stderr.unpipe();
 		this.service.stdout.removeAllListeners();
