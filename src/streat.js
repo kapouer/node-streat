@@ -42,7 +42,7 @@ export default class Streat {
 		debug('spawn exiftool');
 		this.running = true;
 
-		exitHook(() => this.stop());
+		this.removeExitHook = exitHook(() => this.stop());
 
 		this.service = spawn('exiftool', [
 			'-stay_open', 'True', '-@', '-'
@@ -82,6 +82,10 @@ export default class Streat {
 
 	stop() {
 		this.running = false;
+		if (this.removeExitHook) {
+			this.removeExitHook();
+			this.removeExitHook = null;
+		}
 		if (!this.service) return;
 		this.service.stdout.unpipe();
 		this.service.stderr.unpipe();
