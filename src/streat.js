@@ -1,14 +1,17 @@
-const ChildProcess = require('child_process');
-const Throttle = require('throttleit');
-const { Deferred } = require('class-deferred');
-const JStream = require('jstream');
-const fs = require('fs');
-const tempfile = require('tempfile');
-const debug = require('debug')('streat');
+import { spawn } from 'child_process';
+import Throttle from 'throttleit';
+import { Deferred } from 'class-deferred';
+import JStream from 'jstream';
+import { createWriteStream } from 'fs';
+import tempfile from 'tempfile';
+import Debug from 'debug';
+
+const debug = Debug('streat');
+
 
 JStream.MAX_BUFFER_LENGTH = 1024 * 1024;
 
-module.exports = class Streat {
+export default class Streat {
 	constructor(opts) {
 		this.step = (opts || {}).step || 32768;
 		this.running = false;
@@ -41,7 +44,7 @@ module.exports = class Streat {
 
 		process.on('exit', this.stop);
 
-		this.service = ChildProcess.spawn('exiftool', [
+		this.service = spawn('exiftool', [
 			'-stay_open', 'True', '-@', '-'
 		]);
 
@@ -159,10 +162,10 @@ module.exports = class Streat {
 			destroyStreamRunner(runner);
 		});
 	}
-};
+}
 
 function initStreamRunner(self, runner) {
-	const filestream = fs.createWriteStream(self.filepath, {
+	const filestream = createWriteStream(self.filepath, {
 		autoClose: true,
 		flags: runner.started ? 'a' : 'w',
 		defaultEncoding: 'binary'
