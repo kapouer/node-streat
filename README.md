@@ -22,8 +22,6 @@ Usage
 
 ```js
 import Streat from 'streat';
-// or, const Streat = require('streat');
-
 
 // init code
 const streat = new Street({
