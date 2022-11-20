@@ -93,7 +93,7 @@ export default class Streat {
 		this.service.stderr.removeAllListeners();
 		this.service.removeAllListeners();
 		try {
-			this.service.kill('SIGKILL');
+			this.service.kill('SIGTERM');
 		} catch (ex) {
 			console.error(ex);
 		}
